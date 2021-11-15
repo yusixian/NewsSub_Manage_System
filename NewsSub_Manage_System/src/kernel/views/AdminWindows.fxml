@@ -1,0 +1,932 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="830.0" prefWidth="1253.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kernel.views.AdminViewController">
+   <top>
+      <AnchorPane prefHeight="62.0" prefWidth="1253.0" stylesheets="@css/menuBars.css" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="63.0" prefWidth="626.0" styleClass="topBar">
+               <children>
+                  <Label alignment="CENTER" prefHeight="63.0" prefWidth="238.0" text="报刊订阅管理系统" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="26.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label alignment="CENTER_RIGHT" prefHeight="63.0" prefWidth="194.0" text="尊敬的管理员:" textAlignment="RIGHT" textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label fx:id="topBarUserNameLabel" prefHeight="63.0" prefWidth="164.0" text="用户名" textFill="#fdff80">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox layoutX="603.0" prefHeight="63.0" prefWidth="652.0" styleClass="topBar" stylesheets="@css/menuBars.css">
+               <children>
+                  <Label alignment="CENTER" onMouseClicked="#jumpToMagazineManagePane" prefHeight="63.0" prefWidth="123.0" text="报刊信息管理" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label onMouseClicked="#jumpToGeneralUserManagePane" prefHeight="63.0" prefWidth="83.0" text="用户管理" textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label onMouseClicked="#jumpToAdminManagePane" prefHeight="63.0" prefWidth="103.0" text="管理员管理" textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label onMouseClicked="#jumpToOrderManagePane" prefHeight="63.0" prefWidth="84.0" text="订单管理" textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label alignment="CENTER" onMouseClicked="#jumpToSearchAndStatisticPane" prefHeight="63.0" prefWidth="108.0" text="查询及统计" textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label onMouseClicked="#handleLogout" prefHeight="63.0" prefWidth="43.0" text="退出" textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="20.0" right="10.0" />
+                     </HBox.margin>
+                  </Label>
+               </children></HBox>
+         </children>
+      </AnchorPane>
+   </top>
+   <center>
+      <StackPane stylesheets="@css/utils.css" BorderPane.alignment="CENTER">
+         <children>
+            <BorderPane fx:id="magazineManagePane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <left>
+                  <BorderPane prefHeight="767.0" prefWidth="199.0" BorderPane.alignment="CENTER">
+                     <left>
+                        <TableView fx:id="magazineTable" prefHeight="767.0" prefWidth="356.0" BorderPane.alignment="CENTER">
+                          <columns>
+                            <TableColumn fx:id="mdMidColumn" prefWidth="100.0" text="报刊代号" />
+                            <TableColumn fx:id="mdNameColumn" minWidth="120.0" prefWidth="120.0" text="报刊名称" />
+                          </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                     </left>
+                  </BorderPane>
+               </left>
+               <center>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                     <center>
+                        <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <HBox prefHeight="72.0" prefWidth="719.0">
+                                 <children>
+                                    <Label prefHeight="72.0" prefWidth="174.0" text="请选择您的操作：" textFill="#333333">
+                                       <font>
+                                          <Font size="21.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets left="30.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <Button fx:id="mdManageAddMdButton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleNewMagazine" prefHeight="42.0" prefWidth="247.0" text="以当前信息添加新报刊" textAlignment="JUSTIFY">
+                                       <HBox.margin>
+                                          <Insets bottom="15.0" top="15.0" />
+                                       </HBox.margin>
+                                       <font>
+                                          <Font size="21.0" />
+                                       </font>
+                                    </Button>
+                                    <Button fx:id="mdManageDeleteMdButton" mnemonicParsing="false" onAction="#handleDeleteMagazine" text="删除当前报刊">
+                                       <font>
+                                          <Font size="21.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets left="20.0" top="15.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="mdManageUpdateMdButton" mnemonicParsing="false" onAction="#handleUpdateMagazine" text="更改当前报刊信息" textFill="#fffefe">
+                                       <font>
+                                          <Font size="21.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets bottom="15.0" left="20.0" top="15.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets left="10.0" right="10.0" top="15.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox prefHeight="695.0" prefWidth="876.0">
+                                 <children>
+                                    <VBox prefHeight="695.0" prefWidth="452.0">
+                                       <children>
+                                          <ImageView fx:id="mdManageCover" fitHeight="501.0" fitWidth="359.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@css/images/Reader.jpg" />
+                                             </image>
+                                             <VBox.margin>
+                                                <Insets bottom="20.0" left="30.0" right="20.0" top="50.0" />
+                                             </VBox.margin>
+                                          </ImageView>
+                                          <Button fx:id="mdManageCoverChooseButton" mnemonicParsing="false" onAction="#handleMdCoverChoose" prefHeight="42.0" prefWidth="464.0" text="选择封面图">
+                                             <VBox.margin>
+                                                <Insets bottom="40.0" left="30.0" right="20.0" />
+                                             </VBox.margin>
+                                             <font>
+                                                <Font size="21.0" />
+                                             </font>
+                                          </Button>
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets left="10.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                    <VBox prefHeight="695.0" prefWidth="564.0">
+                                       <children>
+                                          <GridPane prefHeight="593.0" prefWidth="572.0">
+                                            <columnConstraints>
+                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="135.0" minWidth="10.0" prefWidth="132.0" />
+                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="296.0" minWidth="200.0" prefWidth="280.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                              <RowConstraints maxHeight="77.0" minHeight="0.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                              <RowConstraints maxHeight="146.0" minHeight="0.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                              <RowConstraints maxHeight="282.0" minHeight="0.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints maxHeight="331.0" minHeight="10.0" prefHeight="75.0" vgrow="SOMETIMES" />
+                                                <RowConstraints maxHeight="335.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints maxHeight="295.0" minHeight="0.0" prefHeight="75.0" vgrow="SOMETIMES" />
+                                                <RowConstraints maxHeight="349.0" minHeight="10.0" prefHeight="260.0" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                             <VBox.margin>
+                                                <Insets bottom="10.0" left="30.0" right="50.0" top="50.0" />
+                                             </VBox.margin>
+                                             <children>
+                                                <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="117.0" prefWidth="132.0" text="报刊代号：">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font></Label>
+                                                <TextField fx:id="mdManageIdField" prefHeight="38.0" prefWidth="133.0" promptText="报刊代号" GridPane.columnIndex="1">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font></TextField>
+                                                <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="35.0" prefWidth="161.0" text="报刊名称：" GridPane.rowIndex="1">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField fx:id="mdManageNameField" prefHeight="38.0" prefWidth="133.0" promptText="报刊名称" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </TextField>
+                                                <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="35.0" prefWidth="161.0" text="出版报社：" GridPane.rowIndex="2">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="35.0" prefWidth="161.0" text="出版周期：" GridPane.rowIndex="3">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="35.0" prefWidth="161.0" text="周期报价(￥)：" GridPane.rowIndex="4">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="35.0" prefWidth="161.0" text="分类：" GridPane.rowIndex="5">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label alignment="TOP_RIGHT" contentDisplay="RIGHT" prefHeight="290.0" prefWidth="132.0" text="内容简介：" GridPane.rowIndex="6">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField fx:id="mdManagePriceField" prefHeight="38.0" prefWidth="133.0" promptText="周期报价" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </TextField>
+                                                <TextField fx:id="mdManageOfficeField" prefHeight="38.0" prefWidth="133.0" promptText="出版报社" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </TextField>
+                                                <ChoiceBox fx:id="mdManageClassChoiceBox" prefHeight="36.0" prefWidth="135.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                                <TextArea fx:id="mdManageIntroArea" prefHeight="182.0" prefWidth="280.0" promptText="内容简介" text="很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长的一段话" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                                <ChoiceBox fx:id="mdManageCycleChoiceBox" prefHeight="36.0" prefWidth="135.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                             </children>
+                                          </GridPane>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </center>
+                  </BorderPane>
+               </center>
+            </BorderPane>
+            <BorderPane fx:id="generalUserManagePane" prefHeight="200.0" prefWidth="200.0" visible="false">
+               <left>
+                  <BorderPane prefHeight="767.0" prefWidth="199.0" BorderPane.alignment="CENTER">
+                     <left>
+                        <TableView fx:id="generalUserTable" prefHeight="767.0" prefWidth="312.0" BorderPane.alignment="CENTER">
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                           <columns>
+                              <TableColumn fx:id="generalUserIdColumn" minWidth="40.0" prefWidth="40.0" text="用户id" />
+                              <TableColumn fx:id="generalUserNameColumn" minWidth="80.0" text="用户名" />
+                           </columns>
+                        </TableView>
+                     </left>
+                  </BorderPane>
+               </left>
+               <center>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                     <center>
+                        <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <HBox prefHeight="72.0" prefWidth="1011.0">
+                                 <children>
+                                    <Label prefHeight="72.0" prefWidth="174.0" text="请选择您的操作：" textFill="#333333">
+                                       <font>
+                                          <Font size="21.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets left="30.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <Button fx:id="generalUserManageAddButton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleNewUser" prefHeight="42.0" prefWidth="247.0" text="以当前信息添加新用户" textAlignment="JUSTIFY">
+                                       <font>
+                                          <Font size="21.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets bottom="15.0" top="15.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="mdManageDeleteMdButton1" mnemonicParsing="false" onAction="#handleDeleteGeneralUser" text="删除当前用户">
+                                       <font>
+                                          <Font size="21.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets left="20.0" top="15.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="mdManageUpdateMdButton1" mnemonicParsing="false" onAction="#handleUpdateGeneralUser" text="更改当前用户信息" textFill="#fffefe">
+                                       <font>
+                                          <Font size="21.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets bottom="15.0" left="20.0" top="15.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox prefHeight="695.0" prefWidth="876.0">
+                                 <children>
+                                    <VBox prefHeight="695.0" prefWidth="1030.0">
+                                       <children>
+                                          <GridPane prefHeight="586.0" prefWidth="743.0">
+                                             <children>
+                                                <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="117.0" prefWidth="132.0" text="用户id：">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField fx:id="generalUserIdField" prefHeight="38.0" prefWidth="133.0" promptText="用户id" GridPane.columnIndex="1">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </TextField>
+                                                <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="35.0" prefWidth="161.0" text="用户名：" GridPane.rowIndex="1">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField fx:id="generalUserNameField" prefHeight="38.0" prefWidth="133.0" promptText="用户名" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </TextField>
+                                                <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="35.0" prefWidth="161.0" text="用户密码：" GridPane.rowIndex="2">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="35.0" prefWidth="161.0" text="真实姓名：" GridPane.rowIndex="3">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="35.0" prefWidth="161.0" text="身份证号：" GridPane.rowIndex="4">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="35.0" prefWidth="161.0" text="联系电话：" GridPane.rowIndex="5">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="290.0" prefWidth="132.0" text="联系地址：" GridPane.rowIndex="6">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField fx:id="generalUserIdCardField" prefHeight="38.0" prefWidth="133.0" promptText="身份证号" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </TextField>
+                                                <TextField fx:id="generalUserPassWordField" prefHeight="38.0" prefWidth="133.0" promptText="用户密码" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </TextField>
+                                                <TextField fx:id="generalUserRealNameField" prefHeight="38.0" prefWidth="133.0" promptText="真实姓名" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </TextField>
+                                                <TextField fx:id="generalUserPhoneField" prefHeight="38.0" prefWidth="133.0" promptText="联系电话" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </TextField>
+                                                <TextField fx:id="generalUserAddressField" prefHeight="38.0" prefWidth="133.0" promptText="联系地址" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </TextField>
+                                             </children>
+                                             <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="135.0" minWidth="10.0" prefWidth="132.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="296.0" minWidth="200.0" prefWidth="280.0" />
+                                             </columnConstraints>
+                                             <rowConstraints>
+                                                <RowConstraints maxHeight="77.0" minHeight="0.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints maxHeight="146.0" minHeight="0.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints maxHeight="282.0" minHeight="0.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints maxHeight="331.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints maxHeight="335.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints maxHeight="295.0" minHeight="0.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints maxHeight="349.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                             </rowConstraints>
+                                             <VBox.margin>
+                                                <Insets bottom="230.0" left="200.0" right="50.0" top="30.0" />
+                                             </VBox.margin>
+                                          </GridPane>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </center>
+                  </BorderPane>
+               </center></BorderPane>
+            <BorderPane fx:id="adminManagePane" prefHeight="200.0" prefWidth="200.0" visible="false">
+               <left>
+                  <BorderPane prefHeight="767.0" prefWidth="199.0" BorderPane.alignment="CENTER">
+                     <left>
+                        <TableView fx:id="adminTable" prefHeight="767.0" prefWidth="312.0" BorderPane.alignment="CENTER">
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                           <columns>
+                              <TableColumn fx:id="adminIdColumn" minWidth="40.0" prefWidth="40.0" text="管理员id" />
+                              <TableColumn fx:id="adminUserNameColumn" minWidth="80.0" text="管理员用户名" />
+                           </columns>
+                        </TableView>
+                     </left>
+                  </BorderPane>
+               </left>
+               <center>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                     <center>
+                        <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <HBox prefHeight="72.0" prefWidth="1011.0">
+                                 <children>
+                                    <Label prefHeight="72.0" prefWidth="174.0" text="请选择您的操作：" textFill="#333333">
+                                       <font>
+                                          <Font size="21.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets left="30.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <Button fx:id="adminManageAddButton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleAddAdmin" prefHeight="42.0" prefWidth="172.0" text="添加新管理员" textAlignment="JUSTIFY">
+                                       <font>
+                                          <Font size="21.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets bottom="15.0" top="15.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="mdManageDeleteMdButton11" mnemonicParsing="false" onAction="#handleDeleteAdmin" prefHeight="42.0" prefWidth="161.0" text="删除管理员">
+                                       <font>
+                                          <Font size="21.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets left="20.0" top="15.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="mdManageUpdateMdButton11" mnemonicParsing="false" onAction="#handleUpdateAdmin" prefHeight="42.0" prefWidth="234.0" text="更改当前管理员信息" textFill="#fffefe">
+                                       <font>
+                                          <Font size="21.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets bottom="15.0" left="20.0" top="15.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox prefHeight="695.0" prefWidth="876.0">
+                                 <children>
+                                    <VBox prefHeight="695.0" prefWidth="1030.0">
+                                       <children>
+                                          <GridPane prefHeight="586.0" prefWidth="743.0">
+                                             <children>
+                                                <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="117.0" prefWidth="132.0" text="管理员id：">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField fx:id="adminIdField" prefHeight="38.0" prefWidth="133.0" promptText="id" GridPane.columnIndex="1">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </TextField>
+                                                <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="35.0" prefWidth="161.0" text="管理员用户名：" GridPane.rowIndex="1">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField fx:id="adminUserNameField" prefHeight="38.0" prefWidth="133.0" promptText="用户名" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </TextField>
+                                                <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="35.0" prefWidth="161.0" text="管理员密码：" GridPane.rowIndex="2">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField fx:id="adminPassWordField" prefHeight="38.0" prefWidth="133.0" promptText="密码" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </TextField>
+                                             </children>
+                                             <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="135.0" minWidth="10.0" prefWidth="132.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="296.0" minWidth="200.0" prefWidth="280.0" />
+                                             </columnConstraints>
+                                             <rowConstraints>
+                                                <RowConstraints maxHeight="77.0" minHeight="0.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints maxHeight="146.0" minHeight="0.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints maxHeight="282.0" minHeight="0.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                             </rowConstraints>
+                                             <VBox.margin>
+                                                <Insets bottom="450.0" left="200.0" right="50.0" top="30.0" />
+                                             </VBox.margin>
+                                          </GridPane>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </center>
+                  </BorderPane>
+               </center></BorderPane>
+            <BorderPane fx:id="orderManagePane" prefHeight="200.0" prefWidth="200.0" visible="false">
+               <center>
+                  <BorderPane prefHeight="767.0" prefWidth="827.0" BorderPane.alignment="CENTER">
+                     <center>
+                        <VBox prefHeight="767.0" prefWidth="784.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <HBox prefHeight="72.0" prefWidth="599.0">
+                                 <children>
+                                    <Label prefHeight="72.0" prefWidth="208.0" text="请选择您的操作：" textFill="#333333">
+                                       <font>
+                                          <Font size="21.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                    </Label>
+                                    <Button fx:id="orderManageAddButton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleAddOrder" prefHeight="42.0" prefWidth="146.0" text="添加订单" textAlignment="JUSTIFY">
+                                       <font>
+                                          <Font size="21.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets bottom="15.0" top="15.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="orderManageDeleteButton" mnemonicParsing="false" onAction="#handleDeleteOrder" prefHeight="42.0" prefWidth="141.0" text="删除订单">
+                                       <font>
+                                          <Font size="21.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets left="20.0" top="15.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="orderManageUpdateButton" mnemonicParsing="false" onAction="#handleUpdateOrder" prefHeight="42.0" prefWidth="182.0" text="更改订单信息" textFill="#fffefe">
+                                       <font>
+                                          <Font size="21.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets bottom="15.0" left="20.0" top="15.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="20.0" left="10.0" right="10.0" top="20.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox prefHeight="695.0" prefWidth="876.0">
+                                 <children>
+                                    <VBox prefHeight="695.0" prefWidth="1030.0">
+                                       <children>
+                                          <GridPane prefHeight="325.0" prefWidth="586.0">
+                                             <children>
+                                                <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="55.0" prefWidth="213.0" text="订单编号：">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField fx:id="orderManageOIdField" prefHeight="38.0" prefWidth="133.0" promptText="订单编号" GridPane.columnIndex="1">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </TextField>
+                                                <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="35.0" prefWidth="280.0" text="用户名：" GridPane.rowIndex="1">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="35.0" prefWidth="285.0" text="所订报刊名称：" GridPane.rowIndex="2">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="35.0" prefWidth="296.0" text="订单金额/￥：" GridPane.rowIndex="5">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField fx:id="orderManagePriceField" prefHeight="38.0" prefWidth="133.0" promptText="订单金额/￥" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </TextField>
+                                                <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="35.0" prefWidth="319.0" text="订阅份数：" GridPane.rowIndex="4">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="35.0" prefWidth="210.0" text="订阅周期数：" GridPane.rowIndex="3">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <ComboBox fx:id="orderManageUserNameChoiceBox" editable="true" prefHeight="41.0" prefWidth="342.0" promptText="用户名" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                <ComboBox fx:id="orderManageMdNameChoiceBox" editable="true" prefHeight="36.0" prefWidth="336.0" promptText="报刊名称" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                <ComboBox fx:id="orderManageCycleChoiceBox" editable="true" prefHeight="32.0" prefWidth="150.0" promptText="1" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                <ComboBox fx:id="orderManageCopiesChoiceBox" editable="true" prefHeight="32.0" prefWidth="150.0" promptText="1" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                             </children>
+                                             <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="189.0" minWidth="10.0" prefWidth="124.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="329.0" minWidth="200.0" prefWidth="200.0" />
+                                             </columnConstraints>
+                                             <rowConstraints>
+                                                <RowConstraints maxHeight="77.0" minHeight="0.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints maxHeight="146.0" minHeight="0.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints maxHeight="282.0" minHeight="0.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints maxHeight="282.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints maxHeight="282.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints maxHeight="282.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                             </rowConstraints>
+                                             <VBox.margin>
+                                                <Insets bottom="250.0" left="50.0" right="150.0" top="30.0" />
+                                             </VBox.margin>
+                                          </GridPane>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </center>
+                  </BorderPane>
+               </center>
+               <left>
+                  <BorderPane prefHeight="767.0" prefWidth="615.0" BorderPane.alignment="CENTER">
+                     <center>
+                        <TableView fx:id="orderTable" prefHeight="767.0" prefWidth="626.0" BorderPane.alignment="CENTER">
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                           <columns>
+                              <TableColumn fx:id="orderOIdColumn" minWidth="15.0" prefWidth="15.0" text="订单编号" />
+                              <TableColumn fx:id="orderUserNameColumn" minWidth="15.0" prefWidth="15.0" text="用户姓名" />
+                              <TableColumn fx:id="orderMdNameColumn" minWidth="75.0" prefWidth="75.0" text="所订报刊名称" />
+                              <TableColumn fx:id="orderPriceColumn" minWidth="75.0" prefWidth="75.0" text="订单金额（￥）" />
+                           </columns>
+                        </TableView>
+                     </center>
+                  </BorderPane>
+               </left></BorderPane>
+            <BorderPane fx:id="searchAndStatisticPane" prefHeight="200.0" prefWidth="200.0" visible="false">
+               <left>
+                  <VBox prefHeight="767.0" prefWidth="653.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <HBox prefHeight="100.0" prefWidth="653.0">
+                           <children>
+                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="132.0" prefWidth="653.0" text="您可在此处进行查询！" textAlignment="CENTER" textFill="#ff8ea1">
+                                 <font>
+                                    <Font name="System Bold" size="25.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="30.0" prefWidth="625.0">
+                           <children>
+                              <Label alignment="CENTER_RIGHT" layoutX="70.0" layoutY="221.0" prefHeight="36.0" prefWidth="115.0" text="用户名：" textFill="#ff8ea1">
+                                 <font>
+                                    <Font name="System Bold" size="23.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets bottom="15.0" left="15.0" right="10.0" top="15.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <ComboBox fx:id="searchUserNameChoiceBox" editable="true" layoutX="175.0" layoutY="221.0" prefHeight="47.0" prefWidth="455.0">
+                                 <HBox.margin>
+                                    <Insets right="15.0" top="6.0" />
+                                 </HBox.margin>
+                              </ComboBox>
+                           </children>
+                           <VBox.margin>
+                              <Insets left="10.0" right="10.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox prefHeight="68.0" prefWidth="625.0">
+                           <children>
+                              <Label layoutX="315.0" layoutY="221.0" prefHeight="36.0" prefWidth="120.0" text="报刊名称：" textFill="#ff8ea1">
+                                 <font>
+                                    <Font name="System Bold" size="23.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets bottom="15.0" left="15.0" right="5.0" top="15.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <ComboBox fx:id="searchMagazineNameChoiceBox" editable="true" layoutX="446.0" layoutY="221.0" prefHeight="49.0" prefWidth="455.0">
+                                 <HBox.margin>
+                                    <Insets right="15.0" top="6.0" />
+                                 </HBox.margin>
+                              </ComboBox>
+                           </children>
+                           <VBox.margin>
+                              <Insets left="10.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox prefHeight="38.0" prefWidth="653.0">
+                           <children>
+                              <Button fx:id="searchButton" mnemonicParsing="false" onAction="#handleSearchData" text="查询订单">
+                                 <HBox.margin>
+                                    <Insets bottom="10.0" left="260.0" right="20.0" top="10.0" />
+                                 </HBox.margin>
+                                 <font>
+                                    <Font size="23.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </HBox>
+                        <TableView fx:id="searchTable" prefHeight="427.0" prefWidth="633.0">
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                           <columns>
+                              <TableColumn fx:id="searchOIdColumn" minWidth="15.0" prefWidth="15.0" text="订单编号" />
+                              <TableColumn fx:id="searchUserNameColumn" minWidth="15.0" prefWidth="15.0" text="用户姓名" />
+                              <TableColumn fx:id="searchMdNameColumn" minWidth="75.0" prefWidth="75.0" text="所订报刊名称" />
+                              <TableColumn fx:id="searchPriceColumn" minWidth="75.0" prefWidth="75.0" text="订单金额（￥）" />
+                           </columns>
+                           <VBox.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </VBox.margin>
+                        </TableView>
+                     </children>
+                  </VBox>
+               </left>
+               <center>
+                  <VBox prefHeight="767.0" prefWidth="635.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <HBox prefHeight="90.0" prefWidth="635.0">
+                           <children>
+                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="109.0" prefWidth="600.0" text="您可在此处进行数据统计！" textAlignment="CENTER" textFill="#ff8ea1">
+                                 <font>
+                                    <Font name="System Bold" size="25.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="68.0" prefWidth="625.0">
+                           <children>
+                              <HBox prefHeight="68.0" prefWidth="329.0">
+                                 <children>
+                                    <Label layoutX="315.0" layoutY="221.0" prefHeight="38.0" prefWidth="182.0" text="最富有的用户为:" textFill="#ff8ea1">
+                                       <font>
+                                          <Font name="System Bold" size="23.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets bottom="15.0" top="15.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <Label fx:id="mostRichUserLabel" prefHeight="38.0" prefWidth="145.0" text="cos" textFill="#ff9c00">
+                                       <font>
+                                          <Font name="System Bold" size="23.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets bottom="15.0" top="15.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="68.0" prefWidth="259.0">
+                                 <children>
+                                    <Label layoutX="315.0" layoutY="221.0" prefHeight="38.0" prefWidth="155.0" text="订单总金额为:" textFill="#ff8ea1">
+                                       <font>
+                                          <Font name="System Bold" size="23.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets bottom="15.0" top="15.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <Label fx:id="mostRichUserPriceLabel" alignment="CENTER_RIGHT" prefHeight="38.0" prefWidth="101.0" text="300￥" textFill="#ff9c00">
+                                       <font>
+                                          <Font name="System Bold" size="23.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets bottom="15.0" top="15.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                           </children>
+                           <VBox.margin>
+                              <Insets left="10.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox prefHeight="68.0" prefWidth="625.0">
+                           <children>
+                              <HBox prefHeight="68.0" prefWidth="329.0">
+                                 <children>
+                                    <Label layoutX="315.0" layoutY="221.0" prefHeight="38.0" prefWidth="174.0" text="最畅销的报刊为:" textFill="#ff8ea1">
+                                       <font>
+                                          <Font name="System Bold" size="23.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets bottom="15.0" top="15.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <Label fx:id="mostPopularMagazineLabel" prefHeight="38.0" prefWidth="152.0" text="中国国家地理" textFill="#ff9c00">
+                                       <font>
+                                          <Font name="System Bold" size="23.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets bottom="15.0" top="15.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="68.0" prefWidth="259.0">
+                                 <children>
+                                    <Label layoutX="315.0" layoutY="221.0" prefHeight="38.0" prefWidth="155.0" text="订单总金额为:" textFill="#ff8ea1">
+                                       <font>
+                                          <Font name="System Bold" size="23.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets bottom="15.0" top="15.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <Label fx:id="mostPopularMagazinePriceLabel" alignment="CENTER_RIGHT" prefHeight="38.0" prefWidth="118.0" text="300￥" textFill="#ff9c00">
+                                       <font>
+                                          <Font name="System Bold" size="23.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets bottom="15.0" right="5.0" top="15.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                           </children>
+                           <VBox.margin>
+                              <Insets left="10.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox prefHeight="86.0" prefWidth="600.0">
+                           <children>
+                              <Button mnemonicParsing="false" onAction="#handleMdNamePriceStatistic" prefHeight="46.0" prefWidth="295.0" text="按报刊名称统计订单金额">
+                                 <font>
+                                    <Font size="23.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="20.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button mnemonicParsing="false" onAction="#handleMClassPriceStatistic" prefHeight="46.0" prefWidth="254.0" text="按分类统计订单金额">
+                                 <font>
+                                    <Font size="23.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets bottom="10.0" left="20.0" right="10.0" top="20.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="373.0" prefWidth="600.0" scaleShape="false" stylesheets="@css/statistics.css">
+                           <children>
+                              <BarChart fx:id="magazinePriceBarChart" prefHeight="252.0" prefWidth="585.0">
+                                <xAxis>
+                                  <CategoryAxis side="BOTTOM" fx:id="xAxis" />
+                                </xAxis>
+                                <yAxis>
+                                  <NumberAxis side="LEFT" />
+                                </yAxis>
+                                 <VBox.margin>
+                                    <Insets left="2.0" right="5.0" />
+                                 </VBox.margin>
+                                 <HBox.margin>
+                                    <Insets right="15.0" />
+                                 </HBox.margin>
+                              </BarChart>
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="10.0" right="10.0" top="10.0" />
+                           </VBox.margin>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </center></BorderPane>
+         </children>
+      </StackPane>
+   </center>
+</BorderPane>

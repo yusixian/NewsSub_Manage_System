@@ -1,0 +1,41 @@
+#MainPane {
+    -fx-background-image: url("./images/System/LoginBackgroud.jpg");
+    -fx-background-size: 1253px 600px;
+    -fx-background-repeat: none;
+}
+
+Button:hover {
+    -fx-effect: dropshadow(three-pass-box, #202020, 10.0,0, 0, 0);
+}
+GridPane > Label {
+    -fx-text-fill: white;
+    -fx-font-size: 23px;
+}
+
+VBox {
+    -fx-background-color: rgba(0, 0, 0, 0.5);
+    -fx-background-radius: 10px;
+    /*-fx-effect: dropshadow(gaussian, black, 10, 0.1, 0, 0);*/
+}
+
+.inputText {
+    -fx-background-color: rgba(0, 0, 0, 0);
+    -fx-border-color: rgba(256, 256, 256, 0.48);
+    -fx-text-fill: rgba(195, 195, 195, 0.70);
+    -fx-border-width: 0 0 1 0;
+
+}
+
+.pinkBG {
+    -fx-background-color: rgba(243, 137, 226, 0.53);
+}
+
+/*左侧的打钩盒子*/
+.check-box > .box {
+    -fx-background-color: rgba(256, 256, 256, 0.56);
+}
+
+.check-box > .box:hover {
+    -fx-background-color: rgba(256, 256, 256, 0.56);
+    -fx-effect: dropshadow(three-pass-box, #202020, 10.0,0, 0, 0);
+}

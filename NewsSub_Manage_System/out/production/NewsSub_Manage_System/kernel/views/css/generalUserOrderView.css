@@ -1,0 +1,61 @@
+BorderPane {
+    -fx-background-color: #FFFAF0;
+}
+
+HBox {
+    -fx-background-color: #FFFAF0;
+}
+VBox {
+    -fx-background-color: #FFFAF0;
+}
+Button {
+    -fx-text-fill: white;
+    -fx-background-color: #FFB6C1; /*#202020;*/
+}
+Button:hover {
+    -fx-text-fill: #81F3FF;
+    -fx-effect: dropshadow(three-pass-box, #202020, 10.0,0, 0, 0);
+}
+/*表总体*/
+.table-view {
+    /*主色调底色*/
+    -fx-base: #FFB6C1;
+    -fx-font-size: 20px;
+    /*item背景色*/
+    -fx-control-inner-background: #FFFAF0;
+    /*总的背景色 包括蓝色提示框*/
+    -fx-background-color: #FFB6C1; /*#FFC0CB;*/
+    /*两个border的颜色透明*/
+    -fx-table-cell-border-color:  transparent;
+    -fx-table-header-border-color: transparent;
+    -fx-alignment: center;
+}
+
+/*搞定背景色*/
+.table-view .column-header-background {
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header, .table-view .filler{
+    -fx-background-color: transparent;
+}
+
+/*表头文字*/
+.table-view .column-header .label {
+    -fx-font-size: 22px;
+    -fx-text-fill: #FFFAFA;
+    -fx-alignment: center-left;
+}
+
+.table-view .column-header .label:hover {
+    -fx-font-size: 22px;
+    -fx-alignment: center-left;
+    -fx-text-fill: #81F3FF;
+}
+.table-view .column-header {
+    -fx-pref-height: 42px;
+}
+/*选中时的颜色*/
+.table-view:focused .table-row-cell:filled:focused:selected {
+    -fx-background-color: -fx-focus-color;
+}
