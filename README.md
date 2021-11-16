@@ -13,19 +13,17 @@
 普通用户可实现的操作为：报刊订阅、个人信息修改、查看订阅情况。
 界面总体采用JavaFX Scene Builder进行图形化设计，美观方便，异常处理也十分完善，对于管理员、普通用户操作成功与否都有系统提示弹窗。
 本系统实现主要功能的结构图如图
-![image](https://user-images.githubusercontent.com/43498495/141785550-3aa54da4-c9af-4abf-80df-bd5672ec4efe.png)
+![图片10](https://user-images.githubusercontent.com/43498495/141929585-007fdaad-a240-488a-930c-fb4f04613eb3.png)
 # 界面展示
 - 不要在意这个辣眼睛的配色了啦（逃
-  - ![image](https://user-images.githubusercontent.com/43498495/141785809-945cdf98-18f2-4a2e-ac2a-01ee6c627ea2.png)
-  - ![image](https://user-images.githubusercontent.com/43498495/141785836-63cd769d-cf4c-4ade-9ce3-3d6e17428979.png)
-  - ![image](https://user-images.githubusercontent.com/43498495/141785858-4d54c95f-7705-4a1a-a175-33e088d02ea8.png)
-  - ![image](https://user-images.githubusercontent.com/43498495/141785931-9298642e-f705-478c-8128-49dd2869fd05.png)
-  - ![image](https://user-images.githubusercontent.com/43498495/141785952-d3bd0404-0f42-4384-8c39-bdde611ed946.png)
-  - ![image](https://user-images.githubusercontent.com/43498495/141785982-f69f1f4b-5471-4ea7-9772-d1b96d22d5e1.png)
-  - ![image](https://user-images.githubusercontent.com/43498495/141786053-58805ecf-2034-47a3-ab9c-5dbea44e511b.png)
-  - ![image](https://user-images.githubusercontent.com/43498495/141786077-054165a5-47ba-438a-af51-3b2b0c8a3bc7.png)
-- 数据库（
-  - ![image](https://user-images.githubusercontent.com/43498495/141786099-d7a579b4-e6c1-4a4c-9223-9d9aaf6db780.png)
+- ![图片1](https://user-images.githubusercontent.com/43498495/141929433-72f490ce-a29f-419d-919d-6649a3b53305.png)
+![图片2](https://user-images.githubusercontent.com/43498495/141929434-49338a31-d9c9-4ca9-93f3-62baaf22d65a.png)
+![图片3](https://user-images.githubusercontent.com/43498495/141929436-85b7ea6f-c635-4021-8120-aa5cf6d07337.png)
+![图片4](https://user-images.githubusercontent.com/43498495/141929438-a757c689-b2b3-4478-9fee-c14b581d9de5.png)
+![图片5](https://user-images.githubusercontent.com/43498495/141929445-cfc917ff-1a75-456d-96ad-bf4081023cfc.png)
+![图片6](https://user-images.githubusercontent.com/43498495/141929446-2b49eb65-8b39-4c2c-8132-1dc8d6d2277e.png)
+![图片7](https://user-images.githubusercontent.com/43498495/141929427-8de8c537-4e2f-49eb-9b57-6ba732da4d96.png)
+![图片8](https://user-images.githubusercontent.com/43498495/141929430-792c8b81-b748-4591-9282-226645806269.png)
 # javadoc
 ![image](https://user-images.githubusercontent.com/43498495/141786387-a7231fc7-794e-4ce4-bad4-2b9823c964f3.png)
 
